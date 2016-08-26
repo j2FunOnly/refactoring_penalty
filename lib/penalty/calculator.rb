@@ -1,13 +1,12 @@
 require_relative 'table'
-require_relative 'policy/policy'
-require_relative 'policy/default'
+require_relative 'calculator/configurator'
 
 module Penalty
   class Calculator
     include Table
 
     def initialize
-      @policy = Policy::Default.new
+      yield config if block_given?
     end
 
     def get_penalty(kpi, client)
@@ -15,11 +14,11 @@ module Penalty
         raise ArgumentError, "No penalty for kpi = #{kpi}"
       end
 
-      penalty.fetch(@policy.call(client).to_int)
+      penalty.fetch(config.policy.call(client).to_int)
     end
 
-    def policy=(policy)
-      @policy = policy.new
+    def config
+      @config ||= Configurator.new
     end
   end
 end

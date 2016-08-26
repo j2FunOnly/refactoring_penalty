@@ -14,8 +14,9 @@ RSpec.describe Penalty::Calculator do
     end
 
     it 'with custom policy' do
-      calculator = described_class.new
-      calculator.policy = CustomPolicy
+      calculator = described_class.new do |config|
+        config.policy = CustomPolicy
+      end
 
       a, b = calculator.get_penalty(kpi, client)
       expect([a, b]).to eq penalty_table[0][1]
