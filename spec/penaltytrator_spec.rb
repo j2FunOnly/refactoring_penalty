@@ -2,18 +2,20 @@ require 'penaltytrator'
 require 'user_policy'
 
 RSpec.describe Penaltytrator do
+  include PenaltyTable
+
   it 'return penalty with default policy' do
     a, b = subject.get_penalty(95, '3')
-    expect(a).to eq 10
-    expect(b).to eq 8.57
+    expect(a).to eq penalty_table[0][1][0]
+    expect(b).to eq penalty_table[0][1][1]
   end
 
   it 'return penalty with user policy' do
     custom_penalty = Penaltytrator.new
     custom_penalty.policy = UserPolicy
     a, b = subject.get_penalty 150, '4'
-    expect(a).to eq 42.8
-    expect(b).to eq 35.7
+    expect(a).to eq penalty_table[1][2][0]
+    expect(b).to eq penalty_table[1][2][1]
   end
 
   it 'raise error when no kpi in penalty table' do
