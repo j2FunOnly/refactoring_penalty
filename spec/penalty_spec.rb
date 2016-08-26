@@ -2,10 +2,9 @@ require 'penalty'
 require_relative 'support/custom_policy'
 
 RSpec.describe Penalty::Calculator do
-  include Penalty::Table
-
   let(:kpi) { 95 }
   let(:client) { '2' }
+  let(:penalty_table) { Penalty::Storage::Default.new.get_penalties }
 
   describe 'return penalty' do
     it 'with default policy' do
