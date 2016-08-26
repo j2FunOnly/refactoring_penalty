@@ -1,10 +1,7 @@
-require_relative 'table'
 require_relative 'calculator/configurator'
 
 module Penalty
   class Calculator
-    include Table
-
     def initialize
       yield config if block_given?
     end
@@ -19,6 +16,20 @@ module Penalty
 
     def config
       @config ||= Configurator.new
+    end
+
+    def penalty_table
+      @table ||= get_penalties
+    end
+
+    def penalty_table!
+      @table = get_penalties
+    end
+
+    private
+
+    def get_penalties
+      config.storage.get_penalties
     end
   end
 end

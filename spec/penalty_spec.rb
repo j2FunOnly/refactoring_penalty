@@ -25,6 +25,7 @@ RSpec.describe Penalty::Calculator do
       calculator = described_class.new do |config|
         config.storage = Penalty::Storage::JSONFile.new 'spec/fixtures/penalties.json'
       end
+
       a, b = calculator.get_penalty(kpi, client)
       expect([a, b]).to eq penalty_table[0][0]
     end
