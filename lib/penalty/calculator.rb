@@ -1,7 +1,6 @@
 require_relative 'table'
 require_relative 'policy/policy'
 require_relative 'policy/default'
-require_relative 'policy/custom'
 
 module Penalty
   class Calculator
