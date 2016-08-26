@@ -11,7 +11,7 @@ module Penalty
       end
 
       def policy=(new_policy)
-        @policy = new_policy.new
+        @policy = new_policy
       end
     end
   end

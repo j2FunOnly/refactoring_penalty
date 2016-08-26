@@ -15,7 +15,7 @@ RSpec.describe Penalty::Calculator do
 
     it 'with custom policy' do
       calculator = described_class.new do |config|
-        config.policy = CustomPolicy
+        config.policy = CustomPolicy.new
       end
 
       a, b = calculator.get_penalty(kpi, client)
@@ -24,13 +24,13 @@ RSpec.describe Penalty::Calculator do
   end
 
   describe 'raise error' do
-    it 'raise error when no kpi in penalty table' do
+    it 'when no kpi in penalty table' do
       kpi = 800
       expect{ subject.get_penalty(kpi, client) }
         .to raise_error ArgumentError, 'No penalty for kpi = 800'
     end
 
-    it 'raise error when wrong policy' do
+    it 'when wrong policy' do
       client = 'wrong client'
       expect{ subject.get_penalty(kpi, client) }
         .to raise_error ArgumentError, "No Policy for client = #{client}"
