@@ -1,4 +1,5 @@
 require 'penalty'
+require_relative 'support/custom_policy'
 
 module Penalty
   RSpec.describe Calculator do
@@ -10,6 +11,16 @@ module Penalty
 
       a, b = subject.get_penalty(kpi, client)
       expect([a, b]).to eq penalty_table[0][0]
+    end
+
+    it 'return penalty with custom policy' do
+      kpi = 95
+      client = '2'
+      calculator = described_class.new
+      calculator.policy = CustomPolicy
+
+      a, b = calculator.get_penalty(kpi, client)
+      expect([a, b]).to eq penalty_table[0][1]
     end
 
     it 'raise error when no kpi in penalty table' do
