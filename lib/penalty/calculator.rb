@@ -18,6 +18,8 @@ module Penalty
       @config ||= Configurator.new
     end
 
+    private
+
     def penalty_table
       @table ||= get_penalties
     end
@@ -25,8 +27,6 @@ module Penalty
     def penalty_table!
       @table = get_penalties
     end
-
-    private
 
     def get_penalties
       config.storage.get_penalties
