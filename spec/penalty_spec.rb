@@ -6,11 +6,10 @@ module Penalty
 
     it 'return penalty with default policy' do
       kpi = 95
-      client = '3'
+      client = '2'
 
       a, b = subject.get_penalty(kpi, client)
-      expect(a).to eq penalty_table[0][1][0]
-      expect(b).to eq penalty_table[0][1][1]
+      expect([a, b]).to eq penalty_table[0][0]
     end
 
     it 'raise error when no kpi in penalty table' do

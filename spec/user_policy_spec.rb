@@ -13,11 +13,10 @@ module Penalty
     include Table
 
     it 'return penalty with custom policy' do
-      custom_penalty = Calculator.new
-      custom_penalty.policy = MyPolicy
+      calculator = described_class.new
+      calculator.policy = MyPolicy
       a, b = subject.get_penalty 150, '4'
-      expect(a).to eq penalty_table[1][2][0]
-      expect(b).to eq penalty_table[1][2][1]
+      expect([a, b]).to eq penalty_table[1][2]
     end
   end
 end
